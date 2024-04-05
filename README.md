@@ -42,6 +42,8 @@ Viewing Match History: Users can view their match history and statistics by acce
 UML:
 ![image](https://github.com/Mtouch08/JAVA-2-Project/assets/97079008/48a6e92a-fec3-405d-9d10-b40acf4578c1)
 
+Mockup:
+![image](https://github.com/Mtouch08/JAVA-2-Project/assets/97079008/642cc2fc-de41-4e64-b5df-17ed6a818e04)
 
 Briefly outline how your project will demonstrate each of the required LOs. (TBD)
 
