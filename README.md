@@ -39,7 +39,7 @@ Finding Matches: Users enter their desired opponent's region and skill level int
 Recording Match Outcome: Users input the outcome of the match (win or loss) into a dialog box. The application updates the player's statistics accordingly and saves the match outcome.
 Viewing Match History: Users can view their match history and statistics by accessing their player profile. The application displays a summary of past matches, including wins, losses, and win/loss ratio.
 
-UML:
+Class Diagram:
 ![image](https://github.com/Mtouch08/JAVA-2-Project/assets/97079008/48a6e92a-fec3-405d-9d10-b40acf4578c1)
 
 Mockup:
