@@ -13,27 +13,41 @@ Inefficient methods of recording match outcomes and tracking player statistics.
 
 Solution:
 This Badminton Player Finder Application offers a comprehensive solution to address the above problems:
+
 1.User-friendly interface allowing players to input their name, region, and skill level.
+
 2.Algorithm to match players based on region and skill level, ensuring fair and balanced matches.
+
 3.Capability to record match outcomes (wins/losses) and track player statistics over time.
+
 4.Integration with a text file-based storage system to persist player data securely.
 
 Features:
-User Registration: Players can register with their basic information (name, region, skill level).
-Matchmaking: The application matches players based on their specified criteria (region, skill level).
-Match Recording: Players can record match outcomes (wins/losses) after each match.
-Player Statistics: Detailed statistics tracking wins, losses, win percentage, etc., are available for each player.
-Data Persistence: Player data is stored securely in a text file, ensuring data integrity and availability allowing users to track their progress and review past matches.
-Reporting: The application generates reports on player statistics and match outcomes for analysis and review.
-Player Profile Management: Users can create and manage their player profiles, including personal details such as name, region, and skill level.
-Match Search Functionality: Users can search for other players within their region and of similar skill levels to request matches.
+
+1.User Registration: Players can register with their basic information (name, region, skill level).
+
+2.Matchmaking: The application matches players based on their specified criteria (region, skill level).
+
+3.Match Recording: Players can record match outcomes (wins/losses) after each match.
+
+4.Player Statistics: Detailed statistics tracking wins, losses, win percentage, etc., are available for each player.
+
+5.Data Persistence: Player data is stored securely in a text file, ensuring data integrity and availability allowing users to track their progress and review past matches.
+
+6.Reporting: The application generates reports on player statistics and match outcomes for analysis and review.
+
+7.Player Profile Management: Users can create and manage their player profiles, including personal details such as name, region, and skill level.
+
+8.Match Search Functionality: Users can search for other players within their region and of similar skill levels to request matches.
 
 Target audience:
+
 Badminton enthusiasts of all skill levels, from casual players to competitive athletes.
 Badminton clubs and organizations looking to facilitate match arrangements and track player performance.
 Coaches and trainers seeking a tool to monitor their players' progress and performance over time.
 
 User Interaction:
+
 Creating a Profile: Users input their personal information, including name, region, and skill level, into designated text fields. Upon clicking the "Submit" button, their profile is saved, and they gain access to the application's features.
 
 Finding Matches: Users enter their desired opponent's region and skill level into the respective text fields. Upon clicking the "Find Match" button, the application searches for matching players. If a match is found, the user is prompted to either send a request to the match or look for another match.
