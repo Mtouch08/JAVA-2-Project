@@ -40,18 +40,29 @@ Recording Match Outcome: Users input the outcome of the match (win or loss) into
 Viewing Match History: Users can view their match history and statistics by accessing their player profile. The application displays a summary of past matches, including wins, losses, and win/loss ratio.
 
 Class Diagram:
+
+
 ![image](https://github.com/Mtouch08/JAVA-2-Project/assets/97079008/48a6e92a-fec3-405d-9d10-b40acf4578c1)
+
+
+
+
+
+
 
 Mockup:
 
 Login window:
+
 ![image](https://github.com/Mtouch08/PlayBadmintonApp-Java/assets/97079008/32e4d120-79f2-491d-9425-675bbd3a1b03)
 
 
 Player registration window:
+
 ![image](https://github.com/Mtouch08/PlayBadmintonApp-Java/assets/97079008/c3d48802-a50c-41e0-8016-151dda5ceb37)
 
 Player stats window:
+
 ![image](https://github.com/Mtouch08/JAVA-2-Project/assets/97079008/642cc2fc-de41-4e64-b5df-17ed6a818e04)
 
 Match finder window:
