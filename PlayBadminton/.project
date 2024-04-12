@@ -14,16 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>Images/badminton icon.jpg</name>
-			<type>1</type>
-			<locationURI>WORKSPACE_LOC/OneDrive/Desktop/badminton%20icon.jpg</locationURI>
-		</link>
-		<link>
-			<name>Images/badmintonbackground.jpg</name>
-			<type>1</type>
-			<locationURI>WORKSPACE_LOC/OneDrive/Desktop/badmintonbackground.jpg</locationURI>
-		</link>
-	</linkedResources>
 </projectDescription>
