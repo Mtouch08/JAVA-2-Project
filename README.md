@@ -50,7 +50,7 @@ User Interaction:
 
 Creating a Profile: Users input their personal information, including name, region, and skill level, into designated text fields. Upon clicking the "Submit" button, their profile is saved, and they gain access to the application's features.
 
-Finding Matches: Users enter their desired opponent's region and skill level into the respective text fields. Upon clicking the "Find Match" button, the application searches for matching players. If a match is found, the user is prompted to either send a request to the match or look for another match.
+Finding Matches: Users enter their desired opponent's region and skill level into the respective text fields. Upon clicking the "Find Match" button, the application searches for matching players. If a match is found, a list of players will be displayed to select from, otherwise a "no players in your area" prompt will displayed.
 
 Recording Match Outcome: Users input the outcome of the match (win or loss) into a dialog box. The application updates the player's statistics accordingly and saves the match outcome.
 Viewing Match History: Users can view their match history and statistics by accessing their player profile. The application displays a summary of past matches, including wins, losses, and win/loss ratio.
@@ -58,7 +58,8 @@ Viewing Match History: Users can view their match history and statistics by acce
 Class Diagram:
 
 
-![image](https://github.com/Mtouch08/JAVA-2-Project/assets/97079008/48a6e92a-fec3-405d-9d10-b40acf4578c1)
+![PlayBadminton drawio](https://github.com/Mtouch08/PlayBadmintonApp-Java/assets/97079008/f0ef813c-29a9-4a35-bfc6-3aa70d88efae)
+
 
 
 
@@ -82,6 +83,8 @@ Player stats window:
 ![image](https://github.com/Mtouch08/JAVA-2-Project/assets/97079008/642cc2fc-de41-4e64-b5df-17ed6a818e04)
 
 Match finder window:
+
+![image](https://github.com/Mtouch08/PlayBadmintonApp-Java/assets/97079008/f0da6ff3-f43e-40c6-9d2a-5ce8db1de654)
 
 
 
