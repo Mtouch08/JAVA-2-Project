@@ -35,7 +35,9 @@ Coaches and trainers seeking a tool to monitor their players' progress and perfo
 
 User Interaction:
 Creating a Profile: Users input their personal information, including name, region, and skill level, into designated text fields. Upon clicking the "Submit" button, their profile is saved, and they gain access to the application's features.
+
 Finding Matches: Users enter their desired opponent's region and skill level into the respective text fields. Upon clicking the "Find Match" button, the application searches for matching players. If a match is found, the user is prompted to either send a request to the match or look for another match.
+
 Recording Match Outcome: Users input the outcome of the match (win or loss) into a dialog box. The application updates the player's statistics accordingly and saves the match outcome.
 Viewing Match History: Users can view their match history and statistics by accessing their player profile. The application displays a summary of past matches, including wins, losses, and win/loss ratio.
 
