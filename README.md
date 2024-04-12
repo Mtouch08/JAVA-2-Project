@@ -1,4 +1,4 @@
-# JAVA-2-Project
+# PlayBadmintonApp-Java
 
 Project proposal:
 
