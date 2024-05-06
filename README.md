@@ -83,8 +83,8 @@ Player stats window:
 ![image](https://github.com/Mtouch08/JAVA-2-Project/assets/97079008/642cc2fc-de41-4e64-b5df-17ed6a818e04)
 
 Match finder window:
+![image](https://github.com/Mtouch08/PlayBadmintonApp-Java/assets/97079008/a08335d4-f2ee-4624-9b0f-c7ea73071586)
 
-![image](https://github.com/Mtouch08/PlayBadmintonApp-Java/assets/97079008/f0da6ff3-f43e-40c6-9d2a-5ce8db1de654)
 
 
 
