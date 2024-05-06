@@ -75,8 +75,8 @@ Login window:
 
 
 Player registration window:
+![image](https://github.com/Mtouch08/PlayBadmintonApp-Java/assets/97079008/1569c260-dd3a-4649-85a7-ff07f6664fc5)
 
-![image](https://github.com/Mtouch08/PlayBadmintonApp-Java/assets/97079008/c3d48802-a50c-41e0-8016-151dda5ceb37)
 
 Player stats window:
 
