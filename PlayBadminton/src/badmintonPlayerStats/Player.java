@@ -1,34 +1,68 @@
 package badmintonPlayerStats;
 
+import java.util.Arrays;
+
 public class Player
 {
-	private String name;
-    private String region;
-    private String skillLevel;
-    private String passwordString;
+	protected String name;
+	protected String email;
+	protected static int phoneNumber;
+	protected String region;
+	protected String skillLevel;
     private int wins;
     private int losses;
+	private char[] password;
+	
 
-    // Constructor
-    public Player(String name, String region, String skillLevel, String passwordString) 
+	public Player()
+	{
+		
+	}
+	
+	public Player(String name)
+	{
+		this.name=name;
+	}
+	
+	 public Player(String email, char[] password) {
+	        this.email = email;
+	        this.password = Arrays.copyOf(password, password.length); // Deep copy for security
+	    }
+	 
+	public Player(String name, String email, int phoneNmber)
+	{
+		this.name=name;
+		this.email=email;
+	}
+	
+
+    public Player(String name, String region, String skillLevel) 
     {
         this.name = name;
         this.region = region;
         this.skillLevel = skillLevel;
-        this.passwordString = passwordString;
-        this.wins = 0;
-        this.losses = 0;
+
     }
+    
 
     // Getters and setters
     public String getName() 
     {
         return name;
     }
+    
+    public String getEmail()
+    {
+    	return email;
+    }
 
     public String getRegion() 
     {
         return region;
+    }
+    
+    public int getPhoneNumber() {
+    	return phoneNumber;
     }
 
     public String getSkillLevel() 
@@ -36,9 +70,8 @@ public class Player
         return skillLevel;
     }
     
-    public String getPasswordString()
-    {
-    	return passwordString;
+    public char[] getPassword() {
+        return Arrays.copyOf(password, password.length); // Return a copy to preserve encapsulation and security
     }
 
     public int getWins() 
@@ -52,26 +85,19 @@ public class Player
     }
 
     // Method to record match outcome
-    public void recordMatchOutcome(boolean win) {
-        if (win) {
+    public void recordMatchOutcome(boolean b, int wins2) {
+        if (b) 
+        {
             this.wins++;
         } else {
             this.losses++;
         }
     }
+    
+ // clear the password from memory when no longer needed
+    public void clearPassword() {
+        Arrays.fill(password, '0');
+    }
 
-	public Player()
-	{
-		
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args)
-	{
-		// TODO Auto-generated method stub
-
-	}
 
 }
