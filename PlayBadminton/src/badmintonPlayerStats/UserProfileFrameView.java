@@ -19,6 +19,10 @@ public class UserProfileFrameView extends MainFrameView
 	    private ImageIcon profilePic = new ImageIcon("C://Users//milli//JAVA-2-Project//PlayBadminton//Images//profilePic.jpg");
 
 	    private ImageIcon backgroundImage2 = new ImageIcon("C://Users//milli//JAVA-2-Project//PlayBadminton//Images//profileViewBackground.jpg");
+		private JLabel statsLabel;
+		private JLabel statsLabel2;
+		private JLabel statsLabel3;
+		private JLabel recordLabel;
 
 	    public UserProfileFrameView(PlayerManagerModel model) {
 	        super(model);
@@ -77,7 +81,7 @@ public class UserProfileFrameView extends MainFrameView
 	    }
 
 	    private void setPanelLayout() {
-	        userInfoPanel.setLayout(new GridLayout(5, 1));
+	        userInfoPanel.setLayout(new GridLayout(10, 1));
 	        userProfilePicturePanel.setLayout(new BorderLayout());
 	        buttonPanel.setLayout(new GridLayout(1, 2));
 	    }
@@ -88,16 +92,25 @@ public class UserProfileFrameView extends MainFrameView
 	            nameLabel = new JLabel("Name: " + currentPlayer.getName());
 	            locationLabel = new JLabel("Location: " + currentPlayer.getRegion());
 	            skillLevelLabel = new JLabel("Skill Level: " + currentPlayer.getSkillLevel());
+	            
 	        } else {
-	            nameLabel = new JLabel("Name: Unknown");
-	            locationLabel = new JLabel("Location: Unknown");
-	            skillLevelLabel = new JLabel("Skill Level: Unknown");
+	            nameLabel = new JLabel("Name: ");
+	            locationLabel = new JLabel("Location: ");
+	            skillLevelLabel = new JLabel("Skill Level: ");
+	            statsLabel = new JLabel("Women Singles: ");
+	            statsLabel2 = new JLabel("Women Doubles: ");
+	            statsLabel3 = new JLabel("Mix Doubles: ");
+	            recordLabel = new JLabel("Record: ");
 	        }
 
 	        userInfoPanel.setPreferredSize(new Dimension(400, 150));
 	        userInfoPanel.add(nameLabel);
 	        userInfoPanel.add(locationLabel);
 	        userInfoPanel.add(skillLevelLabel);
+	        userInfoPanel.add(statsLabel);
+	        userInfoPanel.add(statsLabel2);
+	        userInfoPanel.add(statsLabel3);
+	        userInfoPanel.add(recordLabel);
 	        userInfoPanel.setOpaque(false);
 	        userInfoPanel.setBorder(BorderFactory.createTitledBorder("Player Stats"));
 	    }
@@ -106,7 +119,7 @@ public class UserProfileFrameView extends MainFrameView
 	        profilePictureLabel = new JLabel(profilePic);
 	        profilePictureLabel.setHorizontalAlignment(SwingConstants.CENTER);
 	        profilePictureLabel.setVerticalAlignment(SwingConstants.TOP);
-	        profilePictureLabel.setPreferredSize(new Dimension(350, 250));
+	        profilePictureLabel.setPreferredSize(new Dimension(250, 250));
 	        userProfilePicturePanel.setPreferredSize(new Dimension(390, 300));
 	        userProfilePicturePanel.setOpaque(false);
 	        userProfilePicturePanel.add(profilePictureLabel);
