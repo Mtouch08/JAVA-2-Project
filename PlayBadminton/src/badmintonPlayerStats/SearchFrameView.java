@@ -2,6 +2,9 @@ package badmintonPlayerStats;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class SearchFrameView extends MainFrameView {
     private JPanel settingPanel; // Top left panel with setting icon button
@@ -15,24 +18,24 @@ public class SearchFrameView extends MainFrameView {
     private JCheckBox cButton = new JCheckBox("C Level");
     private JCheckBox dPlusButton = new JCheckBox("D+ Level");
     private JCheckBox dButton = new JCheckBox("D Level");
-    private JLabel skillLabel = new JLabel("Select level(s):");
+    private JLabel skillLabel = new JLabel("Select desired level(s):");
     private JTextField regionField = new JTextField("Enter your region");
 
     public SearchFrameView(PlayerManagerModel model) {
         super(model);
+        this.model=model;
     	initFrame();
         initComponents();
         addComponents();
+        addListeners();
        
         setVisible(true);
     }
     
     private void initFrame() {
+    	// Configure the frame
         setTitle("Play Badminton");
 		setLayout(new BorderLayout());
-		//image from acesporty.com
-		// Configure the frame
-		setIconImage(image.getImage());//fineartamerica.com
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(800,600);
 		setResizable(false);
@@ -125,6 +128,30 @@ public class SearchFrameView extends MainFrameView {
         add(searchPanel, BorderLayout.WEST); 
         add(resultsPanel, BorderLayout.CENTER);
     }
+    
+
+    private void addListeners() {
+        findMatchButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String region = regionField.getText();
+                String skillLevel = getSelectedSkillLevel();
+                ArrayList<Player> matchingPlayers = model.findMatchingPlayers(region, skillLevel);
+                // Do something with matchingPlayers, like displaying them in a list
+            }
+        });
+    }
+
+    private String getSelectedSkillLevel() {
+        StringBuilder skillLevel = new StringBuilder();
+        if (aButton.isSelected()) skillLevel.append("A Level ");
+        if (bButton.isSelected()) skillLevel.append("B Level ");
+        if (cButton.isSelected()) skillLevel.append("C Level ");
+        if (dPlusButton.isSelected()) skillLevel.append("D+ Level ");
+        if (dButton.isSelected()) skillLevel.append("D Level ");
+        return skillLevel.toString().trim();
+    }
+    
     // Override methods to prevent adding components from MainFrameView
     @Override
     public void addLoginPanel() {

@@ -21,8 +21,11 @@ import javax.swing.JTextField;
 
 public class MainFrameView extends JFrame
 {
+	private JTextField loginEmailField = new JTextField("Enter email address");
+	private JPasswordField loginPasswordField = new JPasswordField("Enter Password");
+	private JTextField signUpEmailField = new JTextField("Enter email address");
+	private JPasswordField signUpPasswordField = new JPasswordField("Enter Password");
 	private JTextField nameField = new JTextField("Enter First and Last Name");
-	private JTextField emailField = new JTextField("Enter email address");
 	private JPasswordField passwordField = new JPasswordField("Enter Password");
 	private JLabel signUpLabel = new JLabel("I don't have an account:");
 	private JButton signUpButton = new JButton("Sign Up");
@@ -31,7 +34,7 @@ public class MainFrameView extends JFrame
 	protected JPanel contentPane; //custom content pane for background image
 	protected ImageIcon image = new ImageIcon("C://Users//milli//JAVA-2-Project//PlayBadminton//Images//badminton icon.jpg");
 	protected JLabel titleLabel = new JLabel("Search > Request Match > Play! Let's Go!");
-	private PlayerManagerModel model;
+	protected PlayerManagerModel model;
 	private Font defaultFont = new Font("Arial", Font.BOLD, 20);
 	private Font titleFontSize = new Font("Arial", Font.BOLD, 30);
 	private Color foregroundColor = Color.WHITE;
@@ -80,8 +83,9 @@ public class MainFrameView extends JFrame
 			}
 		};
 		contentPane.setLayout(null);
-		setFontStyle();
+		
 		addContentPane();
+		
 	
 	}
 	
@@ -91,62 +95,84 @@ public class MainFrameView extends JFrame
 		// Configure the frame
 		setIconImage(image.getImage());//fineartamerica.com
 		setContentPane(contentPane);
+		initPanels();
+		setPanelLayout();
+		addPanels();
+		setFontStyle();
+		setPanelStyle();
 		addTitlePanel();
 		addLoginPanel();
 		addNewUserPanel();
+		addSignUpPanel();
+		
+		signUpPanel.setVisible(false);
+	}
+	
+	private void initPanels() {
+		titlePanel = new JPanel();
+		loginPanel = new JPanel();
+		newUserPanel = new JPanel();
+		signUpPanel = new JPanel();
+	}
+	
+	private void addPanels() {
+		contentPane.add(titlePanel);
+		contentPane.add(loginPanel);
+		contentPane.add(newUserPanel);
+		contentPane.add(signUpPanel);
+		
+	}
+	
+	private void setPanelLayout() {
+		loginPanel.setLayout(new GridLayout(3,1));
+		newUserPanel.setLayout(new GridLayout(2,1));
+		signUpPanel.setLayout(new GridLayout(6,1));
+
 	}
 	private void addTitlePanel()
 	{
-	    titlePanel.setOpaque(false);
+	    
 	    titlePanel.setBounds(100,0,600,100);
 	    titlePanel.add(titleLabel);
-	    contentPane.add(titlePanel);
+
 	}
 	
 	public void addLoginPanel()
 	{
-		loginPanel = new JPanel(new GridLayout(3,1));
-		loginPanel.setBounds(510,100,250,200);
-		loginPanel.setOpaque(false);
-		loginPanel.add(emailField);
-		loginPanel.add(passwordField);
+		loginPanel.setBounds(510,150,250,200);
+		loginPanel.add(loginEmailField);
+		loginPanel.add(loginPasswordField);
 		loginPanel.add(loginButton);
 		loginButton.addActionListener( new LoginListener());
-		contentPane.add(loginPanel);
 	}
 	
 	public void addNewUserPanel() {
-		newUserPanel = new JPanel(new GridLayout(2,1));
-		newUserPanel.setBounds(510,300,250,150);
-		newUserPanel.setOpaque(false);
+		newUserPanel.setBounds(510,350,250,150);
 		newUserPanel.add(signUpLabel);
 		newUserPanel.add(signUpButton);
 		signUpButton.addActionListener( new signUpListener());	
-	    contentPane.add(newUserPanel);
-
 	}
 	
 	public void addSignUpPanel() {
-		signUpPanel = new JPanel(new GridLayout(6,1));
 		signUpPanel.setBounds(300,250,250,300);
-		signUpPanel.setOpaque(false);
+		
 		signUpPanel.add(nameField);
-		signUpPanel.add(emailField);
+		signUpPanel.add(signUpEmailField);
 		signUpPanel.add(regionField);
 		signUpPanel.add(skillField);
-		signUpPanel.add(passwordField);
+		signUpPanel.add(signUpPasswordField);
 		signUpPanel.add(registerButton);
 		registerButton.addActionListener( new RegisterListener());	
-	    contentPane.add(signUpPanel);
 	}
 	public void setFontStyle()
 	{
 		styleComponent(nameField, defaultFont, foregroundColor);
-		styleComponent(emailField, defaultFont, foregroundColor);
+		styleComponent(loginEmailField, defaultFont, foregroundColor);
 		styleComponent(passwordField, defaultFont, foregroundColor);
 		styleComponent(signUpLabel, defaultFont, foregroundColor);	
 		styleComponent(titleLabel, titleFontSize, titleLabelColor);	
 		styleComponent(regionField, defaultFont, foregroundColor);
+		styleComponent(loginPasswordField,defaultFont,foregroundColor);
 		loginButton.setFont(defaultFont);
 		signUpButton.setFont(defaultFont);
 		registerButton.setFont(defaultFont);
@@ -159,10 +185,17 @@ public class MainFrameView extends JFrame
 	        component.setForeground(foregroundColor);
 	  }
 	 
+	 private void setPanelStyle() {
+		 titlePanel.setOpaque(false);
+		 loginPanel.setOpaque(false);
+		 newUserPanel.setOpaque(false);
+		 signUpPanel.setOpaque(false);
+	 }
+	 
 	  private class LoginListener implements ActionListener {
 	        @Override
 	        public void actionPerformed(ActionEvent e) {
-	            String email = emailField.getText();
+	            String email = loginEmailField.getText();
 	            char[] password = passwordField.getPassword();
 
 	            try {
@@ -174,7 +207,7 @@ public class MainFrameView extends JFrame
 	                // Attempt to validate login
 	                if (model.validateLogin(email, password)) {
 	                    JOptionPane.showMessageDialog(MainFrameView.this, "Login successful!");
-	                    new SearchFrameView(model);
+	                    goToSearchFrame();
 	                } else {
 	                    JOptionPane.showMessageDialog(MainFrameView.this, "Invalid email or password.");
 	                }
@@ -193,7 +226,7 @@ public class MainFrameView extends JFrame
 	 	    public void actionPerformed(ActionEvent event) {
 	 	        loginPanel.setVisible(false);
 	 	        newUserPanel.setVisible(false);
-	 	        addSignUpPanel(); 
+	 	        signUpPanel.setVisible(true); 
 	 	    }
 	    }
 	 	
@@ -214,11 +247,16 @@ public class MainFrameView extends JFrame
 	               }
 	           }
 	       }
+	    
+	    private void goToSearchFrame() {
+	    	new SearchFrameView(model);
+	    	this.dispose();
+	    }
 	 	
 	private void returnToLogin() {
 		signUpPanel.setVisible(false);
 	    newUserPanel.setVisible(false);
-	    addLoginPanel();
+	    loginPanel.setVisible(true);
 	}
 
     public static void main(String[] args) 

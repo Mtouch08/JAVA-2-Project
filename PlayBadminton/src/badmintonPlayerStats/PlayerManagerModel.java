@@ -5,6 +5,7 @@ import java.io.*;
 
 public class PlayerManagerModel {
     private ArrayList<Player> players;
+    private Player currentPlayer;
     private static final String DATA_FILE = "C:\\\\Users\\\\milli\\\\OneDrive\\\\Desktop\\\\Test\\\\output.txt";
 
     // Constructor
@@ -32,10 +33,23 @@ public class PlayerManagerModel {
 
     // Method to validate login credentials
     public boolean validateLogin(String email, char[] password) {
-        if (email == null) {
-            return false;
+        boolean isValid = players.stream()
+                                 .anyMatch(player -> email.equals(player.getEmail()) && Arrays.equals(player.getPassword(), password));
+        if (isValid) {
+            setCurrentPlayer(email);
         }
-        return players.stream().anyMatch(player -> email.equals(player.getEmail()) && Arrays.equals(player.getPassword(), password));
+        return isValid;
+    }
+
+    public void setCurrentPlayer(String email) {
+        this.currentPlayer = players.stream()
+                                    .filter(player -> player.getEmail().equals(email))
+                                    .findFirst()
+                                    .orElse(null);
+    }
+
+    public Player getCurrentPlayer() {
+        return this.currentPlayer;
     }
 
     // Method to find matching players based on region and skill level
@@ -100,4 +114,5 @@ public class PlayerManagerModel {
             System.out.println("Error updating player statistics: " + e.getMessage());
         }
     }
+
 }
