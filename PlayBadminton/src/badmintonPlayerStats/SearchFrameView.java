@@ -5,6 +5,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SearchFrameView extends MainFrameView {
     private JPanel settingPanel; // Top left panel with setting icon button
@@ -27,8 +28,7 @@ public class SearchFrameView extends MainFrameView {
     	initFrame();
         initComponents();
         addComponents();
-        addListeners();
-       
+              
         setVisible(true);
     }
     
@@ -42,13 +42,13 @@ public class SearchFrameView extends MainFrameView {
     }
 
     private void initComponents() {
-        
     	initPanels();
         setPanelLayout();
         addSettingPanel();
         addMenuPanel();
         addSearchPanel();
         addResultPanel();
+        
     }
     
     private void initPanels() {
@@ -81,13 +81,11 @@ public class SearchFrameView extends MainFrameView {
     }
    
    private void addSearchPanel() {
-    // Create a panel to hold the regionField
-       //JPanel regionPanel = new JPanel();
+ 
        regionField.setPreferredSize(new Dimension(100, 150)); // Set preferred size with smaller height
        //regionPanel.add(regionField);
        searchPanel.add(regionField);
 
-       // Create the JSlider
        JSlider distanceSlider = new JSlider(JSlider.HORIZONTAL, 0, 50, 0); // min, max, initial
        distanceSlider.setMajorTickSpacing(10); // Set major tick spacing
        distanceSlider.setPaintLabels(true); // Display labels
@@ -127,19 +125,6 @@ public class SearchFrameView extends MainFrameView {
         add(menuPanel, BorderLayout.SOUTH);
         add(searchPanel, BorderLayout.WEST); 
         add(resultsPanel, BorderLayout.CENTER);
-    }
-    
-
-    private void addListeners() {
-        findMatchButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String region = regionField.getText();
-                String skillLevel = getSelectedSkillLevel();
-                ArrayList<Player> matchingPlayers = model.findMatchingPlayers(region, skillLevel);
-                // Do something with matchingPlayers, like displaying them in a list
-            }
-        });
     }
 
     private String getSelectedSkillLevel() {

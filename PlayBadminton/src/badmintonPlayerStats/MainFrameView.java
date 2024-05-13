@@ -44,14 +44,13 @@ public class MainFrameView extends JFrame
 	private JPanel signUpPanel;
 	private JPanel loginPanel;
 	private JPanel newUserPanel;
-	protected JPanel titlePanel = new JPanel(); // Initialize titlePanel
+	protected JPanel titlePanel = new JPanel(); 
 	
 	
 	public MainFrameView(PlayerManagerModel model)
 	{
-		
-		initializeFrame();
 		initializeModel(model);
+		initializeFrame();
 		initializeUI();
 		setVisible(true);
 	 }
@@ -83,10 +82,8 @@ public class MainFrameView extends JFrame
 			}
 		};
 		contentPane.setLayout(null);
-		
 		addContentPane();
-		
-	
+
 	}
 	
 	private void addContentPane()
@@ -215,7 +212,7 @@ public class MainFrameView extends JFrame
 	                JOptionPane.showMessageDialog(MainFrameView.this, "Error: " + ex.getMessage());
 	            } finally {
 	                // Clear the password from memory for security
-	                Arrays.fill(password, '0');
+	                Arrays.fill(password, '\0');
 	            }
 	        }
 	    }

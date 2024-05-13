@@ -9,8 +9,8 @@ public class Player
 	protected static int phoneNumber;
 	protected String region;
 	protected String skillLevel;
-    private int wins;
-    private int losses;
+    private int wins=0;
+    private int losses=0;
 	private char[] password;
 	
 
