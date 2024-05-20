@@ -1,6 +1,10 @@
 # PlayBadmintonApp-Java
 
 ## Badminton Player Finder App
+
+## Table of Contents
+
+### Description:
 Badminton is a popular sport enjoyed by millions worldwide, and finding suitable opponents for matches can sometimes be challenging. My proposed Badminton Player Finder Application aims to solve this problem by providing a platform for badminton players to connect, find opponents of similar skill levels within their region, and arrange matches conveniently.
 
 ### Problem:
