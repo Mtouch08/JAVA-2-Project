@@ -81,9 +81,13 @@ Coaches and trainers seeking a tool to monitor their players' progress and perfo
 ![image](https://github.com/Mtouch08/PlayBadmintonApp-Java/assets/97079008/1569c260-dd3a-4649-85a7-ff07f6664fc5)
 
 
-### Player stats window:
+### User Profile window:
 
 ![image](https://github.com/Mtouch08/JAVA-2-Project/assets/97079008/642cc2fc-de41-4e64-b5df-17ed6a818e04)
+![image](https://github.com/Mtouch08/PlayBadmintonApp-Java/assets/97079008/368b584d-bc5e-4778-b43f-c7f2935f0ce8)
+
 
 ### Match finder window:
 ![image](https://github.com/Mtouch08/PlayBadmintonApp-Java/assets/97079008/a08335d4-f2ee-4624-9b0f-c7ea73071586)
+![image](https://github.com/Mtouch08/PlayBadmintonApp-Java/assets/97079008/892d494d-bba8-4ab5-af10-51a714200185)
+
