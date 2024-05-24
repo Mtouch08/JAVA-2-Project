@@ -1,17 +1,20 @@
-package badmintonPlayerStats;
+package application;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.text.JTextComponent;
+import java.util.List;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Arrays;
 
 public class SearchFrameView extends MainFrameView {
-    private JPanel settingPanel; // Top left panel with setting icon button
-    private JPanel resultsPanel; // Center panel with search result list
-    private JPanel menuPanel; // Bottom panel with JMenu
-    private JPanel searchPanel; // Left panel with search components
+    private JPanel settingPanel,resultsPanel,menuPanel,searchPanel; 
     private ImageIcon settingimage = new ImageIcon("C://Users//milli//JAVA-2-Project//PlayBadminton//Images//settingicon.jpg");
     private JButton findMatchButton = new JButton("Find Match");
     private JCheckBox aButton = new JCheckBox("A Level");
@@ -21,14 +24,14 @@ public class SearchFrameView extends MainFrameView {
     private JCheckBox dButton = new JCheckBox("D Level");
     private JLabel skillLabel = new JLabel("Select desired level(s):");
     private JTextField regionField = new JTextField("Enter your region");
-
+    private PlayerManagerModel model;
     public SearchFrameView(PlayerManagerModel model) {
         super(model);
         this.model=model;
     	initFrame();
         initComponents();
         addComponents();
-              
+        setupListeners();
         setVisible(true);
     }
     
@@ -90,8 +93,16 @@ public class SearchFrameView extends MainFrameView {
        distanceSlider.setMajorTickSpacing(10); // Set major tick spacing
        distanceSlider.setPaintLabels(true); // Display labels
        distanceSlider.setPreferredSize(new Dimension(250, 150)); // Set preferred size
-
-       // Add the slider to the menuPanel
+       // Add listener to the distanceSlider
+       distanceSlider.addChangeListener(new ChangeListener() {
+           public void stateChanged(ChangeEvent e) {
+               // Get the selected value from the slider
+               int selectedDistance = ((JSlider) e.getSource()).getValue();
+               // You can use the selectedDistance value in your search criteria
+               System.out.println("Selected distance: " + selectedDistance);
+           }
+       });
+    
        searchPanel.add(distanceSlider);
        searchPanel.add(skillLabel);
        searchPanel.add(aButton);
@@ -104,15 +115,58 @@ public class SearchFrameView extends MainFrameView {
        searchPanel.setBorder(BorderFactory.createTitledBorder("Search Options"));
    }
    
+   private void setupListeners() {
+       ButtonListeners listener = new ButtonListeners(null, this, model);
+       findMatchButton.setActionCommand("findMatch");
+       findMatchButton.addActionListener(listener);
+   }
    private void addResultPanel() {
-	   resultsPanel.setLayout(new BorderLayout()); // Set BorderLayout for resultsPanel
-       JList<String> searchResultList = new JList<>(new String[]{"Result 1", "Result 2", "Result 3"}); // Example data
+       resultsPanel.setLayout(new BorderLayout()); // Set BorderLayout for resultsPanel
+       JList<String> searchResultList = new JList<>(new String[]{}); 
        JScrollPane scrollPane = new JScrollPane(searchResultList);
        resultsPanel.add(scrollPane); // Add scroll pane to resultsPanel
-
-       // Set resultsPanel to the center of the page
-       
    }
+   
+   // Method to display matching players in the results panel
+   public void displayMatchingPlayers(List<Player> matchingPlayers) {
+       DefaultListModel<Player> model = new DefaultListModel<>();
+       JList<Player> searchResultList = new JList<>(model);
+       searchResultList.setCellRenderer(new PlayerLinkRenderer());
+
+       if (!matchingPlayers.isEmpty()) {
+           for (Player player : matchingPlayers) {
+               model.addElement(player);
+           }
+       } else {
+           model.addElement(new Player("No matching players found for the selected criteria.", ""));
+       }
+
+       searchResultList.addMouseListener(new MouseAdapter() {
+           @Override
+           public void mouseClicked(MouseEvent e) {
+               int index = searchResultList.locationToIndex(e.getPoint());
+               if (index >= 0) {
+                   Player selectedPlayer = model.getElementAt(index);
+                   if (!selectedPlayer.getName().equals("No matching players found for the selected criteria.")) {
+                       openPlayerProfile(selectedPlayer);
+                   }
+               }
+           }
+       });
+
+       resultsPanel.removeAll();
+       resultsPanel.setLayout(new BorderLayout());
+       resultsPanel.add(new JScrollPane(searchResultList), BorderLayout.CENTER);
+       resultsPanel.revalidate();
+       resultsPanel.repaint();
+   }
+
+   private void openPlayerProfile(Player player) {
+       model.setPlayer(player); 
+       // Now open the UserProfileFrameView with the updated model
+       new UserProfileFrameView(model);
+   }
+   
     private void setPanelLayout() {
     	// Set layouts for panels
         searchPanel.setLayout(new GridLayout(10,1)); 
@@ -127,16 +181,20 @@ public class SearchFrameView extends MainFrameView {
         add(resultsPanel, BorderLayout.CENTER);
     }
 
-    private String getSelectedSkillLevel() {
-        StringBuilder skillLevel = new StringBuilder();
-        if (aButton.isSelected()) skillLevel.append("A Level ");
-        if (bButton.isSelected()) skillLevel.append("B Level ");
-        if (cButton.isSelected()) skillLevel.append("C Level ");
-        if (dPlusButton.isSelected()) skillLevel.append("D+ Level ");
-        if (dButton.isSelected()) skillLevel.append("D Level ");
-        return skillLevel.toString().trim();
+    public String getSelectedSkillLevels() {
+        StringBuilder skillLevels = new StringBuilder();
+        if (aButton.isSelected()) skillLevels.append("A,");
+        if (bButton.isSelected()) skillLevels.append("B,");
+        if (cButton.isSelected()) skillLevels.append("C,");
+        if (dPlusButton.isSelected()) skillLevels.append("D+,");
+        if (dButton.isSelected()) skillLevels.append("D,");
+        if (skillLevels.length() > 0) skillLevels.setLength(skillLevels.length() - 1); // Remove trailing comma
+        return skillLevels.toString();
     }
     
+    public String getRegion() {
+    	return regionField.getText();
+    }
     // Override methods to prevent adding components from MainFrameView
     @Override
     public void addLoginPanel() {
@@ -152,11 +210,7 @@ public class SearchFrameView extends MainFrameView {
     public void addSignUpPanel() {
         // Override to prevent adding sign-up panel from MainFrameView
     }
-
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            new SearchFrameView(new PlayerManagerModel());
-            
-        });
+    	new SearchFrameView(new PlayerManagerModel());
     }
 }

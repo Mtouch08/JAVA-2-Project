@@ -1,0 +1,7 @@
+Hi Hi	haha@gmail.com,San Diego, Ca,A,123ha ha	haha@gmail.com,San Diego, Ca,D,123Millie Tan	Millietan@gmail.com	San Diego, Ca	A	abc123
+Ben So	benso@gmail.com	San Diego, Ca	D	abc123
+Melanie So	melanieso@gmail.com	San Diego,Ca	D	abc123
+Mylie So	Mylieso@gmail.com	San Diego,Ca	C	abc123
+Ben So	benso@gmail.com	San Diego,Ca	D	abc123
+Colin Chang	Colinchang@gmail.com	San Diego,Ca	D	abc123
+Millie Tan	Millietan@gmail.com	San Diego,Ca	A	abc

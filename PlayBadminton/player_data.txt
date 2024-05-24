@@ -1,1 +1,0 @@
-MillieTouch,region,skillLevel,0,0

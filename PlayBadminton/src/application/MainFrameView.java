@@ -1,23 +1,22 @@
-package badmintonPlayerStats;
+package application;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Arrays;
+import java.util.HashMap;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
-
+/**
+ * Class responsibility: 
+ */
 
 public class MainFrameView extends JFrame
 {
@@ -39,23 +38,25 @@ public class MainFrameView extends JFrame
 	private Font titleFontSize = new Font("Arial", Font.BOLD, 30);
 	private Color foregroundColor = Color.WHITE;
 	private Color titleLabelColor = Color.YELLOW;
-	private JTextField regionField = new JTextField("San Diego,Ca");
+	private JTextField regionField = new JTextField("Enter your city,state");
 	private JTextField skillField = new JTextField("Enter skill level: A,C,D+,D");
-	private JPanel signUpPanel;
-	private JPanel loginPanel;
-	private JPanel newUserPanel;
-	protected JPanel titlePanel = new JPanel(); 
-	
-	
-	public MainFrameView(PlayerManagerModel model)
+	private JPanel signUpPanel,loginPanel,newUserPanel;
+	protected JPanel titlePanel;
+	/**
+	 * 
+	 * @param model
+	 */
+	protected MainFrameView(PlayerManagerModel model)
 	{
+		//loginInfo = loginInfoOriginal;
 		initializeModel(model);
 		initializeFrame();
 		initializeUI();
+		setupListeners();
 		setVisible(true);
 	 }
 	
-	protected void initializeFrame()
+	private void initializeFrame()
 	{
 		setTitle("Play Badminton");
 		setLayout(new BorderLayout());
@@ -63,12 +64,16 @@ public class MainFrameView extends JFrame
 		setSize(800,600);
 		setResizable(false);
 	}
-
+	/**
+	 * 
+	 * @param model
+	 */
 	private void initializeModel(PlayerManagerModel model)
 	{
 		this.model=model;
 	}
-
+	
+	// Sets up the content pane with a custom paint component for drawing the background
 	private void initializeUI()
 	{
 		contentPane = new JPanel(){
@@ -83,8 +88,7 @@ public class MainFrameView extends JFrame
 		};
 		contentPane.setLayout(null);
 		addContentPane();
-
-	}
+		}
 	
 	private void addContentPane()
 	{
@@ -128,10 +132,8 @@ public class MainFrameView extends JFrame
 	}
 	private void addTitlePanel()
 	{
-	    
 	    titlePanel.setBounds(100,0,600,100);
 	    titlePanel.add(titleLabel);
-
 	}
 	
 	public void addLoginPanel()
@@ -140,27 +142,33 @@ public class MainFrameView extends JFrame
 		loginPanel.add(loginEmailField);
 		loginPanel.add(loginPasswordField);
 		loginPanel.add(loginButton);
-		loginButton.addActionListener( new LoginListener());
 	}
 	
-	public void addNewUserPanel() {
+	protected void addNewUserPanel() {
 		newUserPanel.setBounds(510,350,250,150);
 		newUserPanel.add(signUpLabel);
 		newUserPanel.add(signUpButton);
-		signUpButton.addActionListener( new signUpListener());	
 	}
 	
-	public void addSignUpPanel() {
+	protected void addSignUpPanel() {
 		signUpPanel.setBounds(300,250,250,300);
-		
 		signUpPanel.add(nameField);
 		signUpPanel.add(signUpEmailField);
 		signUpPanel.add(regionField);
 		signUpPanel.add(skillField);
 		signUpPanel.add(signUpPasswordField);
 		signUpPanel.add(registerButton);
-		registerButton.addActionListener( new RegisterListener());	
 	}
+		
+	private void setupListeners() {
+		loginButton.addActionListener(new ButtonListeners(this, null, model));
+	    signUpButton.addActionListener(new ButtonListeners(this, null, model));
+	    registerButton.addActionListener(new ButtonListeners(this, null, model));
+		registerButton.setActionCommand("register");
+		signUpButton.setActionCommand("signUp");	
+		loginButton.setActionCommand("login");
+	}
+	
 	public void setFontStyle()
 	{
 		styleComponent(nameField, defaultFont, foregroundColor);
@@ -170,12 +178,14 @@ public class MainFrameView extends JFrame
 		styleComponent(titleLabel, titleFontSize, titleLabelColor);	
 		styleComponent(regionField, defaultFont, foregroundColor);
 		styleComponent(loginPasswordField,defaultFont,foregroundColor);
-		loginButton.setFont(defaultFont);
-		signUpButton.setFont(defaultFont);
-		registerButton.setFont(defaultFont);
 	}
-
-	 public void styleComponent(JComponent component, Font font, Color foregroundColor) 
+	/**
+	 * 
+	 * @param component
+	 * @param font
+	 * @param foregroundColor
+	 */
+	private void styleComponent(JComponent component, Font font, Color foregroundColor) 
 	  {
 	        component.setOpaque(false);
 	        component.setFont(font);
@@ -188,77 +198,82 @@ public class MainFrameView extends JFrame
 		 newUserPanel.setOpaque(false);
 		 signUpPanel.setOpaque(false);
 	 }
-	 
-	  private class LoginListener implements ActionListener {
-	        @Override
-	        public void actionPerformed(ActionEvent e) {
-	            String email = loginEmailField.getText();
-	            char[] password = passwordField.getPassword();
-
-	            try {
-	                // Check if email or password fields are empty
-	                if (email.isEmpty() || password.length == 0) {
-	                    throw new IllegalArgumentException("Email or password cannot be empty.");
-	                }
-
-	                // Attempt to validate login
-	                if (model.validateLogin(email, password)) {
-	                    JOptionPane.showMessageDialog(MainFrameView.this, "Login successful!");
-	                    goToSearchFrame();
-	                } else {
-	                    JOptionPane.showMessageDialog(MainFrameView.this, "Invalid email or password.");
-	                }
-	            } catch (IllegalArgumentException ex) {
-	                JOptionPane.showMessageDialog(MainFrameView.this, "Error: " + ex.getMessage());
-	            } finally {
-	                // Clear the password from memory for security
-	                Arrays.fill(password, '\0');
-	            }
-	        }
+	 /**
+	  * 
+	  * @return
+	  */
+	 protected String getLoginEmail() {
+	        return loginEmailField.getText();
 	    }
-
-		// Inner class for handling registration
-	 	private class signUpListener implements ActionListener {
-	 		 @Override
-	 	    public void actionPerformed(ActionEvent event) {
-	 	        loginPanel.setVisible(false);
-	 	        newUserPanel.setVisible(false);
-	 	        signUpPanel.setVisible(true); 
-	 	    }
+	 /**
+	  * 
+	  * @return
+	  */
+	 public String getLoginPassword() {
+		 return String.valueOf(loginPasswordField.getPassword());
 	    }
-	 	
-	    private class RegisterListener implements ActionListener {
-	        @Override
-	        public void actionPerformed(ActionEvent event2) {
-	        	   String name = nameField.getText();
-	               String region = regionField.getText();
-	               String skillLevel = skillField.getText();
-	               char[] password = passwordField.getPassword(); // Securely handle password
-
-	               try {
-	                   model.registerPlayer(name, region, skillLevel);
-	                   JOptionPane.showMessageDialog(MainFrameView.this, "User registered!");
-	                   returnToLogin(); // Return to the login view
-	               } catch (Exception e) {
-	                   JOptionPane.showMessageDialog(MainFrameView.this, "Registration failed. Please try again.");
-	               }
-	           }
-	       }
+	 /**
+	  * 
+	  * @return
+	  */
+	 public String getSignUpEmail() {
+	        return signUpEmailField.getText();
+	    }
+	 /**
+	  * 
+	  * @return
+	  */
+	 public String getRegion() {
+	        return regionField.getText();
+	    }
+	 /**
+	  * 
+	  * @return
+	  */
+	 public String getSkillLevel() {
+		 return skillField.getText();
+	    }
+	 /**
+	  * 
+	  * @return
+	  */
+	 public String getSignUpPassword() {
+		 return String.valueOf(signUpPasswordField.getPassword());
+	    }
+	 /**
+	  * 
+	  * @return
+	  */
+	 public String getNameField() {
+		 return nameField.getText();
+	    }
+	 /**
+	  * 
+	  * @return
+	  */
+	 public JPanel getSignUpPanel() {
+		 return signUpPanel;
+	    }
+	 /**
+	  * 
+	  * @return
+	  */
+	 public JPanel getLoginPanel() {
+		 return loginPanel;
+	    }
+	 /**
+	  * 
+	  * @return
+	  */
+	 public JPanel getNewUserPanel() {
+		 return newUserPanel;
+	    }
 	    
-	    private void goToSearchFrame() {
-	    	new SearchFrameView(model);
-	    	this.dispose();
-	    }
-	 	
-	private void returnToLogin() {
-		signUpPanel.setVisible(false);
-	    newUserPanel.setVisible(false);
-	    loginPanel.setVisible(true);
-	}
-
+	    
     public static void main(String[] args) 
     {
     	new MainFrameView(new PlayerManagerModel());
+    	
     }
 }
 
