@@ -60,8 +60,8 @@ Coaches and trainers seeking a tool to monitor their players' progress and perfo
 
 ## Class Diagram:
 
+![image](https://github.com/Mtouch08/PlayBadmintonApp-Java/assets/97079008/4d64f575-b323-4715-a479-3abdfddbe8f6)
 
-![PlayBadminton drawio](https://github.com/Mtouch08/PlayBadmintonApp-Java/assets/97079008/f0ef813c-29a9-4a35-bfc6-3aa70d88efae)
 
 
 
